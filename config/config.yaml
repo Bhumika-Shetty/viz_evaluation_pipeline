@@ -1,0 +1,20 @@
+model:
+  name: "llama-3.3-70b-versatile"
+  api_type: "openai"
+  api_base: "https://api.groq.com/openai/v1"
+  temperature: 0.7
+  max_retries: 3
+dataset:
+  name: "titanic"
+  path: "/scratch/bds9746/viz_evaluation_pipeline/data/titanic.csv"
+outputs:
+  visualizations_dir: "outputs/visualizations"
+  metrics_dir: "outputs/metrics"
+  logs_dir: "outputs/logs"
+  save_code: true
+  save_images: true
+metrics:
+  calculate_fidelity: true
+  calculate_color_delta_e: true
+  calculate_visual_entropy: true
+  calculate_code_accuracy: true
