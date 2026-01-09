@@ -330,6 +330,24 @@ class VisualizationMetrics:
 
         logger.info(f"Code Accuracy: {result['accuracy_score']:.1f}%")
 
+                # --- Runtime execution evidence (manual workflow friendly) ---
+        # In UI/manual evaluation, we cannot safely execute arbitrary code here.
+        # Instead, treat "execution_success" as: the expected output image exists and is non-empty.
+        # Because models were queried via UI and code execution occurred locally, runtime success was verified by the existence of a non-empty output image file rather than sandbox execution within the evaluator.
+        try:
+            import os
+            if self.image_path and os.path.isfile(self.image_path) and os.path.getsize(self.image_path) > 0:
+                result['execution_success'] = True
+            else:
+                result['execution_success'] = False
+                # Only add a message if nothing else already explains failure
+                if result['error_message'] is None:
+                    result['error_message'] = "Output image missing/empty; cannot confirm runtime execution."
+        except Exception as e:
+            result['execution_success'] = False
+            if result['error_message'] is None:
+                result['error_message'] = f"Execution verification failed: {e}"
+
         return result
 
     def calculate_task_completion_time(self, start_time: float, end_time: float) -> Dict:
