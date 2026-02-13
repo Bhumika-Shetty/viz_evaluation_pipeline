@@ -23,8 +23,8 @@ import subprocess
 import shutil
 
 # Import local modules
-from prompts import get_titanic_prompt, get_dataset_prompt
-from metrics import calculate_metrics_for_visualization
+from .prompts import get_titanic_prompt, get_dataset_prompt
+from .metrics import calculate_metrics_for_visualization
 
 # Setup logging
 logging.basicConfig(

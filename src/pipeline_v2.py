@@ -23,8 +23,8 @@ import subprocess
 import time
 
 # Import local modules
-from prompts import get_prompt, get_all_prompt_ids, get_prompt_info, get_expected_insights
-from metrics import calculate_metrics_for_visualization
+from .prompts import get_prompt, get_all_prompt_ids, get_prompt_info, get_expected_insights
+from .metrics import calculate_metrics_for_visualization
 
 # Setup logging
 logging.basicConfig(
